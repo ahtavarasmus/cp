@@ -37,34 +37,54 @@ safe_create_branch() {
     git checkout -b "$branch_name"
 }
 
-# Function to create branches and commits
+# Function to create branches and commits with unique timestamps
 create_branches_and_commits() {
     branch_name=$1
     num_commits=$2
     parent_branch=$3
     second_count=$4
     merge=$5
+    last_timestamp=""
 
     safe_create_branch "$branch_name" "$parent_branch"
     
     # Create a number of commits on the branch
     for ((i=0; i<num_commits; i++)); do
         file_name="${branch_name}_file_${i}.txt"
-        timestamp=$(date -v+"$second_count"S +"%FT%T")
-        create_commit "$branch_name" "$file_name" "Content for $branch_name commit $i" "$timestamp"
+        
+        # Generate a new timestamp and ensure it is unique by comparing with the last one
+        new_timestamp=$(date -v+"$second_count"S +"%FT%T")
+        if [[ "$new_timestamp" == "$last_timestamp" ]]; then
+            # Increment the second count if the timestamp is not unique
+            ((second_count++))
+            new_timestamp=$(date -v+"$second_count"S +"%FT%T")
+        fi
+        last_timestamp=$new_timestamp
+        
+        create_commit "$branch_name" "$file_name" "Content for $branch_name commit $i" "$new_timestamp"
         ((second_count+=10))
     done
 
     # Merge this branch back into the parent if specified
     if [ "$merge" = "true" ]; then
         git checkout "$parent_branch"
-        # Set custom date for the merge commit
-        timestamp=$(date -v+"$second_count"S +"%FT%T")
-        GIT_AUTHOR_DATE="$timestamp" GIT_COMMITTER_DATE="$timestamp" git merge --no-ff -m "Merge $branch_name into $parent_branch" "$branch_name"
+        
+        # Generate a new timestamp for the merge and ensure it is unique
+        merge_timestamp=$(date -v+"$second_count"S +"%FT%T")
+        if [[ "$merge_timestamp" == "$last_timestamp" ]]; then
+            # Increment the second count if the timestamp is not unique
+            ((second_count++))
+            merge_timestamp=$(date -v+"$second_count"S +"%FT%T")
+        fi
+        last_timestamp=$merge_timestamp
+        
+        GIT_AUTHOR_DATE="$merge_timestamp" GIT_COMMITTER_DATE="$merge_timestamp" git merge --no-ff -m "Merge $branch_name into $parent_branch" "$branch_name"
     fi
 
     echo $((second_count+1)) # Increment to ensure unique timestamp for next operation
 }
+
+
 
 # Reset second_count to current time in seconds since 1970-01-01 00:00:00 UTC
 second_count=$(date +%s)
