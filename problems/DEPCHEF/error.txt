@@ -1,0 +1,12 @@
+att 2
+att 5
+att 2
+att 5
+att 9
+att 10
+att 8
+att 10
+att 8
+att 10
+att 9
+time taken : 0.009712 secs

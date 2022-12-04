@@ -1,0 +1,4 @@
+#!/bin/sh
+cd Downloads
+source venv/bin/activate
+python3 cpwatch.py

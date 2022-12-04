@@ -1,0 +1,5 @@
+goal 7
+pre 6
+needed 1
+needed 0
+time taken : 0.009321 secs

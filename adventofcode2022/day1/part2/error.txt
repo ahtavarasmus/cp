@@ -1,0 +1,4 @@
+first 70116
+second 68706
+third 67760
+time taken : 0.011185 secs
