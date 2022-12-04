@@ -8,12 +8,44 @@ using namespace std;
 #endif
 
 void solve(){
-    string line;
+    string alp = "abcdefghijklmnopqrstuvwxyz";
+    map<char,int> m;
+    for (int i = 1; i < 27; ++i){
+        m[alp[i-1]] = i;
+        debug(alp[i-1])
+        debug(i)
+    }
+
+    string line,last_half;
+    int len,mid,sum = 0;
+    char dub;
     while (true){
         getline(cin,line);
-        if (!line.size()) break;
+        len = line.size();
+        if (!len) break;
 
+                
+        mid = len/2;
+        last_half = line.substr(mid,mid);
+        for (int i = 0; i < mid; ++i){
+            if (last_half.find(line[i]) != string::npos){
+                dub = line[i];
+                break;
+            }
+        }
+        debug(dub)
+        int score;
+        if (isupper(dub)){
+            score = m[tolower(dub)]+26;
+            debug(score)
+        } else {
+            score = m[dub];
+            debug(score)
+        }
+
+        sum += score;
     }
+    cout << sum << endl;
 
 }
 
