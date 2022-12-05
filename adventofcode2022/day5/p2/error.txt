@@ -1,0 +1,67 @@
+line[i+1] J
+line[i+1] Z
+line[i+1] G
+line             [J] [Z] [G]            
+line[i+1] Z
+line[i+1] T
+line[i+1] S
+line[i+1] P
+line[i+1] R
+line             [Z] [T] [S] [P] [R]    
+line[i+1] R
+line[i+1] Q
+line[i+1] V
+line[i+1] B
+line[i+1] G
+line[i+1] J
+line [R]         [Q] [V] [B] [G] [J]    
+line[i+1] W
+line[i+1] W
+line[i+1] N
+line[i+1] L
+line[i+1] V
+line[i+1] W
+line[i+1] C
+line [W] [W]     [N] [L] [V] [W] [C]    
+line[i+1] F
+line[i+1] Q
+line[i+1] T
+line[i+1] G
+line[i+1] C
+line[i+1] T
+line[i+1] T
+line[i+1] W
+line [F] [Q]     [T] [G] [C] [T] [T] [W]
+line[i+1] H
+line[i+1] D
+line[i+1] W
+line[i+1] W
+line[i+1] H
+line[i+1] T
+line[i+1] R
+line[i+1] M
+line[i+1] B
+line [H] [D] [W] [W] [H] [T] [R] [M] [B]
+line[i+1] T
+line[i+1] G
+line[i+1] T
+line[i+1] R
+line[i+1] B
+line[i+1] P
+line[i+1] B
+line[i+1] G
+line[i+1] G
+line [T] [G] [T] [R] [B] [P] [B] [G] [G]
+line[i+1] S
+line[i+1] S
+line[i+1] B
+line[i+1] D
+line[i+1] F
+line[i+1] L
+line[i+1] Z
+line[i+1] N
+line[i+1] L
+line [S] [S] [B] [D] [F] [L] [Z] [N] [L]
+line  1   2   3   4   5   6   7   8   9 
+"HAHAHAHAHHAAHHAHAHAHAHHAHHAAHHAHAHAHAH" HAHAHAHAHHAAHHAHAHAHAHHAHHAAHHAHAHAHAH
+time taken : 0.005339 secs
