@@ -9,15 +9,15 @@ using namespace std;
 struct Node {
     string name;
     string type;
-    int size;   
+    long int size;   
     Node* parent;
     set<Node*> children;
 };
 typedef struct Node Node;
 
-void read_graph(Node* root, set<Node*> &dirs){
+void read_graph(Node* root){ 
     for (Node* child : root->children){
-        read_graph(child,dirs);
+        read_graph(child);
     }
 
     if (root->type == "file"){
@@ -26,12 +26,19 @@ void read_graph(Node* root, set<Node*> &dirs){
         if (root->parent != NULL){
             root->parent->size += root->size;
         }
-        if (root->size < 100000){
+    }
+}
+
+void read_graph2(Node* root, set<Node*> &dirs, long int space_needed){
+    for (Node* child : root->children){
+        read_graph2(child,dirs,space_needed);
+    }
+    if (root->type == "dir"){
+        if (root->size > space_needed){
+            debug("here")
             dirs.insert(root);
         }
     }
-
-
 }
 
 void solve(){
@@ -54,7 +61,6 @@ void solve(){
             skip_reading = false;
             if (word == "cd"){
                 cin >> arg;
-                debug(arg)
                 if (arg == "/"){
                     cur_dir = root;
                 } else if (arg == ".."){
@@ -66,14 +72,13 @@ void solve(){
                         }
                     }
                 }
-                debug(cur_dir->name)
             } else {
                 while (cin >> arg and arg != "$"){
                     Node* node = new Node;
                     cin >> name;
                     node->name = name;
                     if (arg != "dir"){
-                        node->size = stoi(arg);
+                        node->size = stol(arg);
                         node->type = "file";
                     } else {
                         node->size = 0;
@@ -91,14 +96,25 @@ void solve(){
 
     set<Node*> dirs;
 
-    read_graph(root,dirs);
+    read_graph(root);
 
-    int sum = 0;
+    debug(root->size)
+    int unused_space = 70000000 - root->size;
+    int space_needed = 30000000 - unused_space; 
+    dirs.clear();
+
+    read_graph2(root,dirs,space_needed);
+
+    Node* cur_min = root;
+    debug(dirs.size())
     for (auto dir : dirs){
-        cout << dir->name << ": " << dir->size << endl;
-        sum += dir->size;
+        debug(dir->name)
+        debug(dir->size)
+        if (dir->size < cur_min->size){
+            cur_min = dir;
+        }
     }
-    cout << "sum: " << sum << endl;
+    cout << "cur_min: " << cur_min->name << " with " << cur_min->size << endl;
 
 
     for (auto item : nodes){
