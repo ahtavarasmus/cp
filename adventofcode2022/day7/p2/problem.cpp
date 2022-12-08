@@ -66,7 +66,7 @@ void solve(){
                 } else if (arg == ".."){
                     cur_dir = cur_dir->parent;
                 } else {
-                    for (Node* n : cur_dir->children){
+                    for (auto &n : cur_dir->children){
                         if (n->name == arg){
                             cur_dir = n;
                         }
