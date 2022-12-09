@@ -37,59 +37,55 @@ void solve(){
         grid.push_back(l);
     }
     int max_scenic = 0;
-    for (int x = 0; x < 99; ++x){
-        for (int y= 0; y < 99; ++y){
-            if (x == 0 and y == 0){
-                grid[x][y].top = 0;
-                grid[x][y].left = 0;
-            } else if (x == 0){
-                grid[x][y].top = 0;
-                // left doesn't matter since top is zero
-                grid[x][y].left = 1;
-            } else if (y == 0){
-                grid[x][y].left = 0;
-                // top doesn't matter since left is zero
-                grid[x][y].top = 1;
-
-            } 
-            else {
-     
-                // right
-                int d = y+1;
-                while (d < 99){
-                    if (grid[x][d].height >= grid[x][y].height) break;
-                    d++;
-                }
-                grid[x][y].right = d-y;
-
-                // bottom
-                d = x+1;
-                while (d < 99){
-                    if (grid[d][y].height >= grid[x][y].height) break;
-                    d++;
-                }
-                grid[x][y].bottom = d-x;
-                
-                // left
-                d = y-1;
-                while (d > -1){
-                    if (grid[x][d].height >= grid[x][y].height) break;
-                    d--;
-                }
-                grid[x][y].left = y-d;
-
-                // top
-                d = x-1;
-                while (d > -1){
-                    if (grid[d][y].height >= grid[x][y].height) break;
-                    d--;
-                }
-                grid[x][y].top = x-d;
+    for (int x = 1; x < 98; ++x){
+        for (int y= 1; y < 98; ++y){
+            // right
+            int d = y+1;
+            int dist = 1;
+            while (true){
+                if (d == 98 or grid[x][d].height >= grid[x][y].height)
+                    break;
+                d++;
+                dist++;
             }
+            grid[x][y].right = dist;
 
-            int scenic = grid[x][y].top*grid[x][y].right*grid[x][y].left*grid[x][y].bottom;
+            // left
+            d = y-1;
+            dist = 1;
+            while (true){
+                if (d == 0 or grid[x][d].height >= grid[x][y].height)
+                    break;
+                d--;
+                dist++;
+            }
+            grid[x][y].left = dist;
+            // top
+            d = x-1;
+            dist = 1;
+            while (true){
+                if (d == 0 or grid[d][y].height >= grid[x][y].height)
+                    break;
+                d--;
+                dist++;
+            }
+            grid[x][y].top = dist;
+                        // bottom
+            d = x+1;
+            dist = 1;
+            while (true){
+                if (d == 98 or grid[d][y].height >= grid[x][y].height)
+                    break;
+                d++;
+                dist++;
+            }
+            grid[x][y].bottom = dist;
+
+            int scenic = grid[x][y].top*grid[x][y].right*grid[x][y].left*
+                grid[x][y].bottom;
             debug(scenic)
             max_scenic = max(scenic,max_scenic);
+            debug(max_scenic)
         }
     }
     cout << max_scenic;
