@@ -39,12 +39,12 @@ void update_head(int &row,int &column,auto &screen,auto &screen_row)
 
 }
 
-void draw_pixel(int reg,int column,vector<char> &screen_row)
+void draw_pixel(int reg,int column,vector<string> &screen_row)
 {
     if (abs(reg-column) < 2){
-        screen_row.push_back('#');
+        screen_row.push_back("🎁");
     } else {
-        screen_row.push_back('.');
+        screen_row.push_back("🎄");
     }
 }
 
@@ -52,8 +52,8 @@ void solve(){
     string signal;
     int v,cycle = 0;
 
-    vector<vector<char>> screen;
-    vector<char> screen_row;
+    vector<vector<string>> screen;
+    vector<string> screen_row;
 
     int sum = 0;
     int reg = 1;
