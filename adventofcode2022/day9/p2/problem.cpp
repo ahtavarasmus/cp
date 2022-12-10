@@ -20,7 +20,7 @@ void move_head(pair<int,int> &head,char dir)
     }
 }
 
-bool tail_behind(const pair<int,int> &head,const pair<int,int> &tail)
+bool tail_behind(pair<int,int> head,pair<int,int> tail)
 {
     if (abs(head.first - tail.first) < 2 and abs(head.second-tail.second) < 2)
         return false;
@@ -74,18 +74,31 @@ void solve(){
     // tail
     pair<int,int> tail;
     tail.first = 0,tail.second = 0;
-    visited.insert(tail);
+
+    // rope
+    vector<pair<int,int> > knots;
+    pair<int,int> knot;
+    knot.first = 0,knot.second = 0;
+    for (int i = 0; i < 10; ++i){
+        knots.push_back(knot);
+    }
+    visited.insert(knot);
+    
     
     
     while (cin >> dir){
         cin >> count;
         while (count--){
             // move head
-            move_head(head,dir);
-            if (tail_behind(head,tail)){
-                move_tail(head,tail);
-                visited.insert(tail);
+            move_head(knots[0],dir);
+            // move knots possibly
+            for (int i = 1; i < 10; ++i){
+                if (tail_behind(knots[i-1],knots[i])){
+                    move_tail(knots[i-1],knots[i]);
+                }
             }
+            // update if tail moved
+            visited.insert(knots[9]);
         }
     }
     cout << visited.size();
