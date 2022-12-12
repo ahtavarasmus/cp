@@ -1,2 +1,1 @@
-path.size() 525
-time taken : 0.021513 secs
+time taken : 0.022765 secs

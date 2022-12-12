@@ -7,7 +7,7 @@ using namespace std;
 #define debug(x)
 #endif
 
-void debug_heights(auto &heights,set<pair<int,int>> &path)
+void debug_heights(auto &heights,set<pair<int,int>> &shortest_path,set<pair<int,int>> &whole_path)
 {
     int height;
     vector<string> colors = {"❤️","🧡","💛","💚","💙","💜","🤎","🖤","🤍"};
@@ -15,8 +15,10 @@ void debug_heights(auto &heights,set<pair<int,int>> &path)
 
     for (int y = 0; y < heights.size(); y++){
         for (int x = 0; x < heights[y].size(); ++x){
-            if (path.find(make_pair(y,x)) != path.end()){
+            if (shortest_path.find(make_pair(y,x)) != shortest_path.end()){
                 cout << colors[7]; 
+            } else if (whole_path.find(make_pair(y,x)) != whole_path.end()){
+                cout << colors[8];
             } else {
                 height = heights[y][x];
                 if (height < 5){
@@ -91,14 +93,21 @@ void solve(){
         if (cur == end){
             // path found
             int steps = 0;
-            set<pair<int,int>> path;
+            set<pair<int,int>> shortest_path;
+            set<pair<int,int>> whole_path;
             while (heights[cur.first][cur.second] != 0){
-                path.insert(cur);
+                shortest_path.insert(cur);
                 cur = parents[cur];
                 steps++;
             }
-            debug(path.size());
-            debug_heights(heights,path);
+            cur = end;
+            while (cur != start){
+                if (shortest_path.find(cur) == shortest_path.end()){
+                    whole_path.insert(cur);
+                }
+                cur = parents[cur];
+            }
+            debug_heights(heights,shortest_path,whole_path);
             cout << "fewest steps: " << steps;
             return;
         }
