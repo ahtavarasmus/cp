@@ -7,11 +7,30 @@ using namespace std;
 #define debug(x)
 #endif
 
-void debug_heights(auto &heights)
+void debug_heights(auto &heights,set<pair<int,int>> &path)
 {
-    for (int x = 0; x < heights.size(); x++){
-        for (int y = 0; y < heights[x].size(); ++y){
-            cout << heights[x][y];
+    int height;
+    vector<string> colors = {"❤️","🧡","💛","💚","💙","💜","🤎","🖤","🤍"};
+    string elf = "🧝";
+
+    for (int y = 0; y < heights.size(); y++){
+        for (int x = 0; x < heights[y].size(); ++x){
+            if (path.find(make_pair(y,x)) != path.end()){
+                cout << colors[7]; 
+            } else {
+                height = heights[y][x];
+                if (height < 5){
+                    cout << colors[4];
+                } else if (height < 10){
+                    cout << colors[3];
+                } else if (height < 15){
+                    cout << colors[2];
+                } else if (height < 20){
+                    cout << colors[1];
+                } else {
+                    cout << colors[0];
+                }
+            }
         }
         cout << endl;
     }
@@ -72,10 +91,14 @@ void solve(){
         if (cur == end){
             // path found
             int steps = 0;
+            set<pair<int,int>> path;
             while (heights[cur.first][cur.second] != 0){
+                path.insert(cur);
                 cur = parents[cur];
                 steps++;
             }
+            debug(path.size());
+            debug_heights(heights,path);
             cout << "fewest steps: " << steps;
             return;
         }
@@ -128,7 +151,6 @@ void solve(){
             }
         }
 
-        debug("aha")
 
     }
     cout << "didn't find path";
