@@ -56,8 +56,9 @@ read_coord(auto &prev,string tmp, auto &cave,auto &lowest_rock)
 
 void print_cave(auto &cave)
 {
+
     for (int y = 0; y < 200; ++y){
-        for (int x = 440; x < 550; ++x){
+        for (int x = 0; x < 1000; ++x){
             pair<int,int> cur;
             cur.first = y;
             cur.second = x;
@@ -79,7 +80,7 @@ void print_cave(auto &cave)
 bool not_in_abyss(auto &cave,auto &lowest_rock)
 {
     pair<int,int> sand = {0,500};
-    while (sand.first < lowest_rock){
+    while (!cave.contains(sand)){
         pair<int,int> next = sand;
         if (!cave.contains({sand.first+1,sand.second})){
             sand.first++;
@@ -132,12 +133,12 @@ void solve(){
         pair<int,int> cur = {lowest_rock+2,l};
         cave[cur] = 1;
     }
+    lowest_rock++;
 
-    int units = 0;
+    long int units = 0;
     while (not_in_abyss(cave,lowest_rock)){
         units++;
     }
-    print_cave(cave);
     cout << units;
 }
 
