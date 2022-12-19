@@ -44,7 +44,9 @@ void solve(){
     long int map_top = INT_MAX;
     long int map_bottom = INT_MIN;
 
+    debug(sensors.size())
     for (pair<long int,long int> & sensor : sensors){
+        cout << sensor.first << endl;
         queue<pair<long int,long int> > q;
         // coords and current dist
         map<pair<long int,long int>,long int> visited;
@@ -53,79 +55,96 @@ void solve(){
         visited[sensor] = 0;
         bool beacon_found = false;
         long int beacon_dist = 0;
+        debug(sensor.first)
         while (!q.empty()){
             cur = q.front();
             q.pop();
-            if (m[cur] == 2 and !beacon_found){
-                // beacon found
-                beacon_found = true;
-                beacon_dist = visited[cur];
-            }
 
 
             // top
-            if (!beacon_found or (beacon_found and visited[cur] == beacon_dist)){
-                map_top = min(map_top,cur.first-1);
-                npair = {cur.first-1,cur.second};
-                if (!visited.contains(npair)){
-                    visited[npair] = visited[cur]+1;
+            npair = {cur.first-1,cur.second};
+            if (m[npair] == 2 and !beacon_found){
+                beacon_found = true;
+                debug("beacon at top")
+                beacon_dist = visited[cur]+1;
+            }
+            map_top = min(map_top,cur.first-1);
+            if (!visited.contains(npair)){
+                visited[npair] = visited[cur]+1;
+                if (!beacon_found or (beacon_found and visited[npair] == beacon_dist)){
                     visible.insert(npair);
                     q.push(npair);
                 }
             }
             // bottom
-            if (!beacon_found or (beacon_found and visited[cur] == beacon_dist)){
-                map_bottom = max(map_bottom,cur.first+1);
-                npair = {cur.first+1,cur.second};
-                if (!visited.contains(npair)){
+            npair = {cur.first+1,cur.second};
+            if (m[npair] == 2 and !beacon_found){
+                beacon_found = true;
+                debug("beacon at bottom")
+                beacon_dist = visited[npair]+1;
+            }
+            map_bottom = max(map_bottom,cur.first+1);
+            if (!visited.contains(npair)){
+                visited[npair] = visited[cur]+1;
+                if (!beacon_found or (beacon_found and visited[npair] == beacon_dist)){
                     q.push(npair);
-                    visited[npair] = visited[cur]+1;
                     visible.insert(npair);
                 }
             }
             // left
-            if (!beacon_found or (beacon_found and visited[cur] == beacon_dist)){
-                map_left = min(map_left,cur.second-1);
-                npair = {cur.first,cur.second-1};
-                if (!visited.contains(npair)){
+            npair = {cur.first,cur.second-1};
+            if (m[npair] == 2 and !beacon_found){
+                beacon_found = true;
+                debug("beacon at left")
+                beacon_dist = visited[cur]+1;
+            }
+            map_left = min(map_left,cur.second-1);
+            if (!visited.contains(npair)){
+                visited[npair] = visited[cur]+1;
+                if (!beacon_found or (beacon_found and visited[npair] == beacon_dist)){
                     q.push(npair);
-                    visited[npair] = visited[cur]+1;
                     visible.insert(npair);
                 }
             }
             // right 
-            if (!beacon_found or (beacon_found and visited[cur] == beacon_dist)){
-                map_right = max(map_right ,cur.second+1);
-                npair = {cur.first,cur.second+1};
-                if (!visited.contains(npair)){
+            npair = {cur.first,cur.second+1};
+            if (m[npair] == 2 and !beacon_found){
+                beacon_found = true;
+                debug("beacon at right")
+                beacon_dist = visited[cur]+1;
+            }
+            map_right = max(map_right ,cur.second+1);
+            if (!visited.contains(npair)){
+                visited[npair] = visited[cur]+1;
+                if (!beacon_found or (beacon_found and visited[npair] == beacon_dist)){
                     q.push(npair);
-                    visited[npair] = visited[cur]+1;
                     visible.insert(npair);
-                }
+                } 
             }
         }
     }
     debug(visible.size())
     long int count = 0;
     for (long int y = map_top; y < map_bottom; ++y){
-        cout << y;
+        //cout << y;
         for (long int x = map_left; x < map_right; ++x){
             pair<long int,long int> cur = {y,x};
             if (m[cur] == 2){
-                cout << "B";
+                //cout << "B";
             } else if (m[cur] == 1){
-                cout << "S";
+                //cout << "S";
             } else {
                 if (visible.contains(cur)){
                     if (y == 10) ++count;
-                    cout << "#";
+                    //cout << "#";
                 } else {
-                    cout << ".";
+                    //cout << ".";
                 }
             }
         }
-        cout << endl;
+        //cout << endl;
     }
+    
 
     cout << count;
 
@@ -143,7 +162,7 @@ int main()
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("error.txt", "w", stderr);
-    //freopen("output.txt", "w", stdout);
+    freopen("output.txt", "w", stdout);
 #endif
     solve();
     cout << "\n";

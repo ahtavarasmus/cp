@@ -1,0 +1,6 @@
+"survived" survived
+"not steady" not steady
+"not steady" not steady
+"not steady" not steady
+"not steady" not steady
+time taken : 0.004504 secs

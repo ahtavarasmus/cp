@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <unistd.h>
 using namespace std;
 
 #ifndef ONLINE_JUDGE
@@ -90,7 +91,7 @@ int main()
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("error.txt", "w", stderr);
-    freopen("output.txt", "w", stdout);
+    //freopen("output.txt", "w", stdout);
 #endif
     solve();
     cout << "\n";
