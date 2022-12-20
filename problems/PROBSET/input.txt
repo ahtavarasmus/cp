@@ -1,0 +1,21 @@
+4
+4 5
+correct 11111
+wrong 10101
+correct 11111
+wrong 01111
+4 5
+correct 10110
+wrong 11111
+correct 11111
+wrong 01000
+4 5
+correct 11111
+wrong 11111
+wrong 10100
+wrong 00000
+4 5
+wrong 10110
+correct 01101
+correct 11111
+wrong 11000
