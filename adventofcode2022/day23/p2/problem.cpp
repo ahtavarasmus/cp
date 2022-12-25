@@ -91,11 +91,6 @@ bool dir_okay(P point,string dir,unordered_set<P> &elves)
 void print_elves(const unordered_set<P> &elves,int top,int bottom,int left,int right)
 {
     P cur;
-    debug(elves.size())
-    debug(top)
-    debug(bottom)
-    debug(left)
-    debug(right)
     for (int y = top; y <= bottom; ++y){
         for (int x = left; x <= right; ++x){
             cur.x = x,cur.y = y;
@@ -107,16 +102,10 @@ void print_elves(const unordered_set<P> &elves,int top,int bottom,int left,int r
         }
         cout << endl;
     }
-    int height = abs(top-bottom)+1;
-    int width = abs(left-right)+1;
-    cout << "height: " << height << endl;
-    cout << "width: " << width << endl;
-    int grid = height*width;
-    cout << "empty tiles: " << grid-elves.size() << endl;
 }
 
 void solve(){
-    // to point and its/their parents
+    // current elves in the map
     unordered_set<P> elves;
     string line;
     int ln;
@@ -137,86 +126,63 @@ void solve(){
     }
 
     list<string> dirs;
+    // where elves want to go(key) and all the elves that want to go there(value)
     unordered_map<P,set<P>> proposed_elves;
-    unordered_set<P> leave_empty;
-    unordered_map<P,int> elf_count;
     dirs.push_back("n"),dirs.push_back("s");
     dirs.push_back("w"),dirs.push_back("e");
-    debug(elves.size())
-    bool cont = false;
+    // keeps track of the number of elves that don't need to move
     int stay_count = 0;
+    // round number
     int r = 0;
     while (true){
         cout << endl;
-        leave_empty.clear();
         proposed_elves.clear();
         stay_count = 0;
         for (auto &elf : elves){
             P cur(elf);
-            debug("start")
-            debug(cur.x)
-            debug(cur.y)
+            // if this elf doesn't need to move, insert is as it is.
             if (no_adjacents(cur,elves)){
-                elf_count[cur] = 1;
                 proposed_elves[cur].insert(elf);
                 stay_count++;
-
-                debug("from noadjacents")
-                debug(cur.x)
-                debug(cur.y)
-                debug(proposed_elves.size())
                 continue;
             }
-            cont = false;
             for (auto &dir : dirs){
+                // if direction was okay
                 if (dir_okay(cur,dir,elves)){
-
                     // move elf if possible
                     if (dir == "n") cur.y--;
                     else if (dir == "s") cur.y++;
                     else if (dir == "w") cur.x--;
                     else cur.x++;
-
-
-                    proposed_elves[cur].insert(elf);
-                    debug("from dir")
-                    debug(cur.x)
-                    debug(cur.y)
-                    debug(proposed_elves.size())
-                    cont = true;
                     break;
                 }
             }
-            if (cont) continue;
+            // insert (moved elf) or (elf that couldn't move)
             proposed_elves[cur].insert(elf);
-            debug("from end")
-            debug(cur.x)
-            debug(cur.y)
-            debug(proposed_elves.size())
-
         }
+        // check if all elves didn't have to move (answer)
         if (stay_count == proposed_elves.size()){
             cout << "ROUND " << r+1 << endl;
             break;
         }
         elves.clear();
+        // cycle directions
         dirs.push_back(dirs.front());
         dirs.pop_front();
-        debug("HAHAHAHAHHW")
-        debug(proposed_elves.size())
 
         for (auto &elf : proposed_elves){
-            debug(elf.first.x)
-            debug(elf.first.y)
+            // if only one elf was going to that spot
             if (elf.second.size() == 1){
                 elves.insert(elf.first);
             } else {
+                // otherwise keep all those elves were they were
                 for (auto &par : elf.second){
                     elves.insert(par);
                 }
             }
         }
 
+        // check the map size
         int left=INT_MAX,right=INT_MIN,top=INT_MAX,bottom=INT_MIN;
         for (auto &elf : elves){
             top = min(top,elf.y);
@@ -226,7 +192,6 @@ void solve(){
         }
 
         cout << "round: " << r+1 << endl;
-        debug(r)
         print_elves(elves,top,bottom,left,right);
         r++;
     }
