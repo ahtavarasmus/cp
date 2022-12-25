@@ -7,6 +7,39 @@ using namespace std;
 #define debug(x)
 #endif
 
+struct Point {
+    int y,x;
+    Point() : y(0),x(0) {};
+    Point(const int& y,const int& x) : y(y),x(x) {};
+    Point(const Point& other){x = other.x,y = other.y;};
+
+    bool operator<(const Point &p) const {
+        if (x != p.x) return x < p.x;
+        return y < p.y;
+    }
+    bool operator==(const Point &p) const {
+        return (x == p.x) and (y == p.y);
+    };
+    bool operator>(const Point &p) const {
+        if (x != p.x) return x > p.x;
+        return y > p.y;
+    };
+    Point& operator=(const Point& other){
+        y = other.y;
+        x = other.x;
+        return *this;
+    };
+    size_t operator()(const Point& pointToHash) const noexcept {
+        size_t hash = pointToHash.x + 10*pointToHash.y;
+        return hash;
+    };
+};
+namespace std {
+    template<> struct hash<Point>{std::size_t operator()(const Point& p) const noexcept {
+            return p(p);}};
+}
+
+
 void solve(){
 
 }
