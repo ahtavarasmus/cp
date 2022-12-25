@@ -138,77 +138,58 @@ void solve(){
 
     list<string> dirs;
     unordered_map<P,set<P>> proposed_elves;
-    unordered_set<P> leave_empty;
-    unordered_map<P,int> elf_count;
     dirs.push_back("n"),dirs.push_back("s");
     dirs.push_back("w"),dirs.push_back("e");
-    debug(elves.size())
     bool cont = false;
+    // rounds
     for (int r = 0; r < 10; ++r){
         cout << endl;
-        leave_empty.clear();
         proposed_elves.clear();
         for (auto &elf : elves){
             P cur(elf);
-            debug("start")
-            debug(cur.x)
-            debug(cur.y)
-            if (no_adjacents(cur,elves)){
-                elf_count[cur] = 1;
-                proposed_elves[cur].insert(elf);
 
-                debug("from noadjacents")
-                debug(cur.x)
-                debug(cur.y)
-                debug(proposed_elves.size())
+            // if enough space not to move insert that elf to proposed as it is
+            if (no_adjacents(cur,elves)){
+                proposed_elves[cur].insert(elf);
                 continue;
             }
             cont = false;
             for (auto &dir : dirs){
+                // if an okay direction was found
                 if (dir_okay(cur,dir,elves)){
-
-                    // move elf if possible
+                    // move elf to there
                     if (dir == "n") cur.y--;
                     else if (dir == "s") cur.y++;
                     else if (dir == "w") cur.x--;
                     else cur.x++;
-
-
-                    proposed_elves[cur].insert(elf);
-                    debug("from dir")
-                    debug(cur.x)
-                    debug(cur.y)
-                    debug(proposed_elves.size())
-                    cont = true;
                     break;
                 }
             }
-            if (cont) continue;
+            // add it to proposed and it's parent as value to set
+            // in case we need to come back if multiple elves are 
+            // wanting to go there
             proposed_elves[cur].insert(elf);
-            debug("from end")
-            debug(cur.x)
-            debug(cur.y)
-            debug(proposed_elves.size())
 
         }
         elves.clear();
+        // roll directions to next one
         dirs.push_back(dirs.front());
         dirs.pop_front();
-        debug("HAHAHAHAHHW")
-        debug(proposed_elves.size())
 
         for (auto &elf : proposed_elves){
-            debug(elf.first.x)
-            debug(elf.first.y)
+            // if only one elf is going to that spot
             if (elf.second.size() == 1){
                 elves.insert(elf.first);
             } else {
+                // else we need to punish all by getting them to stay where
+                // they were (inserting their parent locations)
                 for (auto &par : elf.second){
                     elves.insert(par);
                 }
             }
         }
 
+        // count map size
         int left=INT_MAX,right=INT_MIN,top=INT_MAX,bottom=INT_MIN;
         for (auto &elf : elves){
             top = min(top,elf.y);
@@ -216,9 +197,7 @@ void solve(){
             right = max(right,elf.x);
             left = min(left,elf.x);
         }
-
         cout << "round: " << r+1 << endl;
-        debug(r)
         print_elves(elves,top,bottom,left,right);
     }
 
