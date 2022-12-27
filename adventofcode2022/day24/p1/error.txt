@@ -1,0 +1,149 @@
+code.size() 1
+cur 38146972656250
+fuel 31915503502222
+dir down
+code { (19073486328125, 2) }
+code.size() 1
+last_place 19073486328125
+"hä" hä
+code.size() 2
+cur 30517578125000
+fuel 31915503502222
+dir up
+code { (3814697265625, -2) (19073486328125, 2) }
+code.size() 2
+last_place 3814697265625
+"hä" hä
+code.size() 3
+cur 32043457031250
+fuel 31915503502222
+dir down
+code { (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 3
+last_place 762939453125
+"hä" hä
+code.size() 4
+cur 31890869140625
+fuel 31915503502222
+dir up
+code { (152587890625, -1) (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 4
+last_place 152587890625
+"hä" hä
+code.size() 5
+cur 31921386718750
+fuel 31915503502222
+dir down
+code { (30517578125, 1) (152587890625, -1) (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 5
+last_place 30517578125
+"hä" hä
+code.size() 6
+cur 31915283203125
+fuel 31915503502222
+dir up
+code { (6103515625, -1) (30517578125, 1) (152587890625, -1) (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 6
+last_place 6103515625
+"hä" hä
+code.size() 7
+cur 31915527343750
+fuel 31915503502222
+dir down
+code { (244140625, 1) (6103515625, -1) (30517578125, 1) (152587890625, -1) (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 7
+last_place 244140625
+"hä" hä
+code.size() 8
+cur 31915478515625
+fuel 31915503502222
+dir up
+code { (48828125, -1) (244140625, 1) (6103515625, -1) (30517578125, 1) (152587890625, -1) (762939453125, 2) (3814697265625, -2) (19073486328125, 2) }
+code.size() 8
+last_place 48828125
+"hä" hä
+"keep dir" keep dir
+code.size() 9
+cur 31915498046875
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 10
+cur 31915501953125
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 11
+cur 31915502734375
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 12
+cur 31915502890625
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 13
+cur 31915502921875
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 14
+cur 31915502928125
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 15
+cur 31915502929375
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 16
+cur 31915502929625
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 17
+cur 31915502929675
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 18
+cur 31915502929685
+fuel 31915503502222
+"keep dir" keep dir
+code.size() 19
+cur 31915502929687
+fuel 31915503502222
+code.size() 19
+code.size() 19
+code[place] 2
+place 1
+code[place] 2
+place 5
+code[place] 2
+place 25
+code[place] 2
+place 125
+code[place] 2
+place 625
+code[place] 2
+place 3125
+code[place] 2
+place 15625
+code[place] 2
+place 78125
+code[place] 2
+place 390625
+code[place] 2
+place 1953125
+code[place] 2
+place 9765625
+code[place] -1
+place 48828125
+code[place] 1
+place 244140625
+code[place] -1
+place 6103515625
+code[place] 1
+place 30517578125
+code[place] -1
+place 152587890625
+code[place] 2
+place 762939453125
+code[place] -2
+place 3814697265625
+code[place] 2
+place 19073486328125
+time taken : 0.004253 secs
