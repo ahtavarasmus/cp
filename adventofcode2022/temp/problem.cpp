@@ -43,10 +43,6 @@ struct Point {
     bool operator==(const Point &p) const {
         return (x == p.x) and (y == p.y);
     };
-    bool operator>(const Point &p) const {
-        if (x != p.x) return x > p.x;
-        return y > p.y;
-    };
     Point& operator=(const Point& other){
         y = other.y;
         x = other.x;
