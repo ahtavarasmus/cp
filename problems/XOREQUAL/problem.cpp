@@ -8,13 +8,16 @@ using namespace std;
 #endif
 
 void solve(){
-    int n;
+    long long n;
     cin >> n;
-    debug(n)
-    long long int r = pow(2,n)/2;
+    // DID THIS IN PYTHON
+    /*
+    long long div = pow(10,9)+7;
+    n = n%div;
+    long long r = pow(2,n-1);
 
-    long long int div = pow(10,9)+7;
     cout << r%div;
+    */
 }
 
 int main()
