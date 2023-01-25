@@ -10,14 +10,8 @@ using namespace std;
 void solve(){
     string line,tmp,sx,sy,bx,by;
     long int sensor_x,sensor_y,beacon_x,beacon_y;
-    // sensor is 1, beacon is 2
+    // sensor(y,x) and it's distance to closest beacon
     map<pair<long int,long int>,long int> m;
-    vector<pair<long int,long int> > sensors;
-    // all sensor visible spots
-    set<pair<long int,long int> > visible;
-    long int map_width = 0;
-    long int map_height = 0;
-    pair<long int,long int> cur;
     while (getline(cin,line)){
         istringstream l(line);
         // parsing input line
@@ -27,23 +21,46 @@ void solve(){
         sensor_y = stoi(sy.substr(2,sy.size()-3));
         beacon_x = stoi(bx.substr(2,bx.size()-3));
         beacon_y = stoi(by.substr(2,by.size()-2));
-        // updating the map size
-        cur.first = sensor_y;
-        cur.second = sensor_x;
-        // putting current sensor in map
-        m[cur] = 1;
-        visible.insert(cur);
-        // putting current sensor in vector
-        sensors.push_back(cur);
-        cur.first = beacon_y,cur.second = beacon_x;
-        // putting current beacon in map
-        m[cur] = 2;
-    }
-    long int map_left = INT_MAX;
-    long int map_right = INT_MIN;
-    long int map_top = INT_MAX;
-    long int map_bottom = INT_MIN;
 
+        int man_dist = abs(sensor_x-beacon_x)+abs(sensor_y-beacon_y);
+        m[make_pair(sensor_y,sensor_x)] = man_dist;
+    }
+    // line = set of ranges on that line, range excluding pair.second 
+    map<long int,set<pair<long int,long int>>> lines;
+    for (auto sensor : m){
+        long int y = sensor.first.first,x = sensor.first.second;
+        long int man_dist = sensor.second;
+        pair<long int,long int> new_range = make_pair(x,x+1),neighbour;
+        for (int line = y+man_dist; line <= y-man_dist; ++line){
+            bool found(false);
+            if (lines[line].empty()){
+                lines[line].insert(new_range);
+            } else {
+                for (auto range : lines[line]){
+                    long int r_start = range.first,r_end = range.second;
+                    // fully in that range
+                    if (r_start <= new_range.first and new_range.second < 
+                            r_end){
+                        break;
+                    }
+                    // starts at this range
+                    if (r_start <= new_range.first and new_range.first <
+                            r_end){
+                        if (next_range_start<= new_range.second){
+                            // extend current range to end of next range
+                            it->second = next_range_end;
+                        }
+                    }
+                    if (cur_range.first < range.first){
+                        if (cur_range.first <= prev_range.second){
+
+                        }
+                    }
+                    prev_range = range;
+                }
+            }
+        }
+    }
     debug(sensors.size())
     for (pair<long int,long int> & sensor : sensors){
         cout << sensor.first << endl;
