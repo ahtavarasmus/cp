@@ -1,0 +1,13 @@
+t 1
+mx 1
+t 1
+mx 1
+t 1
+mx 1
+t 1
+mx 1
+t 1
+mx 1
+t 4
+mx 4
+time taken : 0.004071 secs

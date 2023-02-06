@@ -2,7 +2,6 @@
 using namespace std;
 
 
-
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -34,8 +33,35 @@ template <class T> void _print(set<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr
 template <class T> void _print(multiset<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr<<" ";}cerr<<"}";}
 template <class T,class V> void _print(map<T,V> v){cerr<<"{ ";for (auto i : v) {_print(i);cerr << " ";}cerr<<"}";}
 
-void solve(){
 
+void solve(){
+    int n;
+    cin >> n;
+    debug(n)
+    
+    // otherwise find dominant elem and delete no dominant elements
+    map<int,int> m;
+    int t;
+    int dom_count = 0,dom = 0;
+    for (int i = 0; i < n; ++i){
+        cin >> t;
+        m[t]++;
+        if (m[t] > dom_count){
+            dom_count = m[t];
+            dom = t;
+        }
+    }
+    int i = 0;
+    int count = 0;
+    for (auto c : m){
+        if (c.first == dom)
+            continue;
+        count += c.second;
+    }
+    if (n < 3)
+        cout << 0;
+    else
+        cout << count;
 }
 
 int main()

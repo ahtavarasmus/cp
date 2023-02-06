@@ -2,7 +2,6 @@
 using namespace std;
 
 
-
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -34,8 +33,18 @@ template <class T> void _print(set<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr
 template <class T> void _print(multiset<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr<<" ";}cerr<<"}";}
 template <class T,class V> void _print(map<T,V> v){cerr<<"{ ";for (auto i : v) {_print(i);cerr << " ";}cerr<<"}";}
 
-void solve(){
 
+void solve(){
+    int n,t,mx = 0;
+    cin >> n;
+    for (int i = 0; i < n; ++i){
+        cin >> t;
+        debug(t)
+        mx = max(mx,t);
+        debug(mx)
+    }
+    cout << mx;
+    // can it be this easy?
 }
 
 int main()

@@ -10,6 +10,8 @@ using namespace std;
 void solve(){
     string line,tmp,sx,sy,bx,by;
     long int sensor_x,sensor_y,beacon_x,beacon_y;
+    int i = 0;
+    ++i++;
     // sensor(y,x) and it's distance to closest beacon
     map<pair<long int,long int>,long int> m;
     while (getline(cin,line)){

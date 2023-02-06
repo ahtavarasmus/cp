@@ -7,8 +7,52 @@ using namespace std;
 #define debug(x)
 #endif
 
+int msb_bit(int n){
+    int k = (int)(log2(n));
+    return (int)(pow(2,k));
+}
+
 void solve(){
-    
+    int i,j;    
+    cin >> i >> j;
+    debug("s")
+    debug(i)
+    debug(j)
+    if (i == j){
+        cout << 0;
+        return;
+    }
+    // always put i as a bigger one
+    int t;
+    if (i < j){
+        t = j,j = i,i = t;
+    }
+    debug("s")
+    debug(i)
+    debug(j)
+    int j_league = msb_bit(j);
+    int i_league = msb_bit(i);
+    int steps = 0;
+    // first count how many steps to go up until both are
+    // in the same value range (same msb bit)
+    while (msb_bit(i) != j_league){
+        i /= 2;
+        steps++;
+    }
+    debug(steps)
+    debug("s")
+    debug(i)
+    debug(j)
+
+    // round down any odd numbers
+    int sideways = (abs(i-j)/2)*2;
+    // if not already same, the minimum is 2 steps to side one
+    if (i != j) sideways += 2;
+    debug(sideways)
+    steps += sideways;
+
+    debug(steps)
+    debug("e")
 }
 
 int main()

@@ -2,7 +2,6 @@
 using namespace std;
 
 
-
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -34,8 +33,29 @@ template <class T> void _print(set<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr
 template <class T> void _print(multiset<T> v){cerr<<"{ ";for (T i : v){_print(i);cerr<<" ";}cerr<<"}";}
 template <class T,class V> void _print(map<T,V> v){cerr<<"{ ";for (auto i : v) {_print(i);cerr << " ";}cerr<<"}";}
 
-void solve(){
 
+void solve(){
+    int a,b,c,d;
+    cin >> a >> b >> c >> d;
+    // if Mr Pr already in dest
+    if (a == b){
+        cout << "YES";
+        return;
+    }
+    // if Mr Pr wasn't in dest and he won't get any closer 
+    if (c == d){
+        cout << "NO";
+        return;
+    }
+    int diff = abs(a-b);
+    int step = abs(c-d);
+    // if we are getting closer to Ms Ad by {step}-amount every time
+    // we check if distance to there can be made with those steps
+    // evenly or not
+    if (abs(a-b) % abs(c-d) == 0)
+        cout << "YES";
+    else
+        cout << "NO";
 }
 
 int main()
