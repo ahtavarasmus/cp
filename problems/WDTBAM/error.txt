@@ -1,0 +1,27 @@
+points 3
+i 0
+i 1
+i 2
+i 3
+i 4
+i 5
+ns 50
+points 0
+i 0
+i 1
+i 2
+i 3
+i 4
+ns 0
+points 4
+i 0
+i 1
+i 2
+i 3
+i 4
+i 5
+i 6
+i 7
+i 8
+ns 100
+time taken : 0.003354 secs
