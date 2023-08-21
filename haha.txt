@@ -1,0 +1,7 @@
+# making an binary search for my app in python and the following is the pseudocode
+# 1. start with the middle element: if it is the target, then stop
+# 2. otherwise, if the target is less than the middle element, search the left half
+# 3. otherwise, if the target is greater than the middle element, search the right half
+# 4. if you're done searching the array without finding the target, return -1
+
+
