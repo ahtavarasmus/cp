@@ -9,6 +9,7 @@ int main() {
     int n, m;
     cin >> n >> m;
     vector<vector<pair<int, int>>> adj(n);
+    /* if i add something here*/
     for (int i = 0; i < m; ++i) {
         int u, v, w; cin >> u >> v >> w;
         adj[u].push_back({v, w});
@@ -17,6 +18,8 @@ int main() {
 
     vector<bool> vis(n);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    /* and here */
+    /* and here also */
     pq.push({0, 0});
     int ans = 0;
     while (!pq.empty()) {
