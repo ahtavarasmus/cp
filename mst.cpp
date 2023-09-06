@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -22,6 +23,7 @@ int main() {
         auto [w, u] = pq.top(); pq.pop();
         if (vis[u]) continue;
         vis[u] = true;
+        /* testing pacepeek haha */
         ans += w;
         for (auto [v, w] : adj[u]) {
             if (!vis[v]) pq.push({w, v});
