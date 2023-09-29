@@ -1,4 +1,5 @@
 moi = "haha"
+hei = "haha"
 if moi == "haha":
     print("haha")
     print("hey")
