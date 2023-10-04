@@ -1,6 +1,6 @@
 if moi == "haha":
     pass
 else:
-    moi = "h"
+    pass
 # testing!
 # testing!
