@@ -1,4 +1,3 @@
-moi = "ha"
 if moi == "haha":
     pass
 else:
