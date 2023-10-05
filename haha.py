@@ -1,4 +1,3 @@
-    pass
 else:
     moi = "h"
 
