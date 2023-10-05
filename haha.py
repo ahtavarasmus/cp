@@ -3,6 +3,7 @@ if moi == "haha":
 else:
     pass
 print("MOI")
+print("MOI")
 # testing!
 # testing!
 # testing!
