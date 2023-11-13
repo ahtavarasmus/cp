@@ -1,4 +1,4 @@
-import os
+import os,time
 from git import Repo, GitCommandError
 
 # Path to your repository (adjust to your actual repo path)
@@ -20,6 +20,8 @@ def create_commit(branch_name, file_name, content):
     # Add file to staging and commit the change
     repo.index.add([full_path])
     repo.index.commit(f'Update {file_name} on {branch_name}')
+    # Delay for 1 second
+    time.sleep(3)
 
 def safe_create_branch(branch_name, base_branch='master'):
     try:
